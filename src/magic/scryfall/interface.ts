@@ -19,7 +19,7 @@ export type Legality = 'legal' | 'not_legal' | 'restricted' | 'banned';
 
 export type BorderColor = 'black' | 'borderless' | 'gold' | 'silver' | 'white';
 export type Frame = '1993' | '1997' | '2003' | '2015' | 'future';
-export type FrameEffect = 'legendary' | 'miracle' | 'nyxtouched' | 'draft' | 'devoid' | 'tombstone' | 'colorshifted' | 'inverted' | 'sunmoondfc' | 'compasslanddfc' | 'originpwdfc' | 'mooneldrazidfc' | 'moonreversemoondfc' | 'showcase' | 'extendedart';
+export type FrameEffect = 'legendary' | 'miracle' | 'nyxtouched' | 'draft' | 'devoid' | 'tombstone' | 'colorshifted' | 'inverted' | 'sunmoondfc' | 'compasslanddfc' | 'originpwdfc' | 'mooneldrazidfc' | 'moonreversemoondfc' | 'showcase' | 'extendedart' | 'companion';
 
 export type Game = 'paper' | 'arena' | 'mtgo';
 
@@ -163,4 +163,13 @@ export interface IScryfallSet {
     uri: URI;
     icon_svg_uri: URI;
     search_uti: URI;
+}
+
+export type RulingSource = 'wotc' | 'scryfall';
+
+export interface IScryfallRuling {
+    oracle_Id: string;
+    source: RulingSource;
+    published_at: string;
+    comment: string;
 }

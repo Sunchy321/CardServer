@@ -1,43 +1,40 @@
-import saveFile from '../../common/save-file';
-import { getList } from './basic';
+import * as fs from 'fs';
+import * as AsyncLock from 'async-lock';
 
 import { data } from '../../../config';
 
-export interface IScryfallBulkData {
-    object: 'bulk_data';
-    id: string;
-    type: string;
-    name: string;
-    description: string;
-    permalink_uri: string;
-    updated_at: string;
-    compressed_size: number;
-    content_type: string;
-    content_encoding: string;
+const lock = new AsyncLock();
+
+let cardCount = -1;
+let rulingCount = -1;
+
+export function cardList() {
+    const files = fs.readdirSync(data + '/magic/bulk/scryfall').map(v => v.replace(/\.json$/, ''));
+
+    return files.filter(v => v.startsWith('all-cards')).sort();
 }
 
-export async function get() {
-    const bulks = await getList<IScryfallBulkData>('https://api.scryfall.com/bulk-data');
+export async function loadCard(file: string) {
+    lock.acquire('card', () => {
 
-    for (const b of bulks) {
-        if (b.type === 'all_cards') {
-            saveFile(
-                b.permalink_uri,
-                data + '/magic/bulk/scryfall/cards.json',
-                { override: true },
-            );
-        } else if (b.type === 'rulings') {
-            saveFile(
-                b.permalink_uri,
-                data + '/magic/bulk/scryfall/rulings.json',
-                { override: true },
-            );
-        }
-    }
+    })
 }
 
-export async function load() {
+export function getCardCount(): number {
+    return cardCount;
+}
 
+export function rulingList() {
+    const files = fs.readdirSync(data + '/magic/bulk/scryfall').map(v => v.replace(/\.json$/, ''));
+
+    return files.filter(v => v.startsWith('rulings')).sort();
 }
 
 
+export async function loadRuling(file: string) {
+
+}
+
+export function getRulingCount(): number {
+    return rulingCount;
+}

@@ -3,6 +3,6 @@ import router from './router';
 import './format';
 import './format-change';
 import './set';
-import './card';
+import './data';
 
 export default router;
