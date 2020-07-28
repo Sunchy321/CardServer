@@ -4,7 +4,8 @@
   "description": "Card Server",
   "main": "app.ts",
   "scripts": {
-    "dev": "nodemon --inspect src/app.ts"
+    "babel": "npx @babel/node --config-file ./babel.config.js",
+    "dev": "nodemon --exec npm run babel -- src/app.js"
   },
   "repository": {
     "type": "git",
@@ -17,19 +18,15 @@
   },
   "homepage": "https://github.com/Sunchy321/CardServer#readme",
   "devDependencies": {
-    "@types/async-lock": "^1.1.2",
-    "@types/download": "^6.2.4",
-    "@types/koa": "^2.11.1",
-    "@types/koa-logger": "^3.1.1",
-    "@types/koa-router": "^7.4.0",
-    "@types/lodash": "^4.14.149",
-    "@types/mongoose": "^5.7.1",
-    "@types/request-promise-native": "^1.0.17",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.0"
   },
   "dependencies": {
-    "@types/cheerio": "^0.22.16",
     "async-lock": "^1.2.4",
     "async-stream-reader": "^1.2.0",
     "cheerio": "^1.0.0-rc.3",

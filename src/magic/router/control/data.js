@@ -1,6 +1,6 @@
 import router from './router';
 
-import { loadCard, getCardCount, loadRuling, getRulingCount, cardList, rulingList } from '../../scryfall/bulk';
+import { loadCard, getCardProgress, loadRuling, getRulingProgress, cardList, rulingList } from '../../scryfall/bulk';
 
 router.get('/scryfall/bulk-list', async (ctx) => {
     ctx.body = {
@@ -14,7 +14,7 @@ router.post('/scryfall/load-card', async (ctx) => {
 });
 
 router.get('/scryfall/card-progress', async (ctx) => {
-    ctx.body = getCardCount();
+    ctx.body = getCardProgress();
 })
 
 router.post('/scryfall/load-ruling', async (ctx) => {
@@ -22,5 +22,5 @@ router.post('/scryfall/load-ruling', async (ctx) => {
 });
 
 router.get('/scryfall/ruling-progress', async (ctx) => {
-    ctx.body = getRulingCount();
+    ctx.body = getRulingProgress();
 })
