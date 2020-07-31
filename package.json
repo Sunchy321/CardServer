@@ -4,8 +4,7 @@
   "description": "Card Server",
   "main": "app.ts",
   "scripts": {
-    "babel": "npx @babel/node --config-file ./babel.config.js",
-    "dev": "nodemon --exec npm run babel -- src/app.js"
+    "dev": "npx nodemon --exec npx babel-node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -19,26 +18,31 @@
   "homepage": "https://github.com/Sunchy321/CardServer#readme",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.11.0",
     "@babel/node": "^7.10.5",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
-    "webpack": "^4.44.0"
+    "express": "^4.17.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@koa/router": "^9.3.1",
     "async-lock": "^1.2.4",
     "async-stream-reader": "^1.2.0",
     "cheerio": "^1.0.0-rc.3",
     "download": "^7.1.0",
-    "koa": "^2.11.0",
-    "koa-body": "^4.1.1",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
     "koa-logger": "^3.2.1",
-    "koa-router": "^8.0.8",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.9.2",
+    "lodash": "^4.17.19",
+    "mongodb-client-encryption": "^1.1.0",
+    "mongoose": "^5.9.25",
     "request": "^2.88.2",
-    "request-promise-native": "^1.0.8",
-    "winston": "^3.2.1"
+    "request-promise-native": "^1.0.9",
+    "winston": "^3.3.3"
   }
 }

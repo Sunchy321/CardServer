@@ -1,9 +1,10 @@
 import * as fs from 'fs';
-import * as AsyncLock from 'async-lock';
+import AsyncLock from 'async-lock';
 import * as readline from 'readline';
 import * as Reader from 'async-stream-reader';
 
 import { data } from '../../../config';
+import lineReader from '../../common/line-reader';
 
 const lock = new AsyncLock();
 
@@ -18,19 +19,7 @@ export function cardList() {
 
 export function loadCard(file) {
     lock.acquire('card', async () => {
-        const path = data + '/magic/bulk/scryfall' + file + '.json';
-
-        const rl = readline.createInterface({
-            input: fs.createReadStream(path)
-        });
-
-        const reader = new Reader(rl, {
-            events: { data: 'line', end: 'close' }
-        });
-
-        while (true) {
-            const line = await reader.next();
-
+        for (let line of lineReader(data + '/magic/bulk/scryfall' + file + '.json')) {
             if (line === '[') {
                 continue;
             } else if (line === ']') {

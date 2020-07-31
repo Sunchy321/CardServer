@@ -1,6 +1,6 @@
-import * as Koa from 'koa';
-import * as KoaLogger from 'koa-logger';
-import * as KoaBody from 'koa-body';
+import Koa from 'koa';
+import KoaLogger from 'koa-logger';
+import KoaBody from 'koa-body';
 
 import router from './router';
 
