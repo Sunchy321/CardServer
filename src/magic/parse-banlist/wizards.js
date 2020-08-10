@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import * as request from 'request-promise-native';
+import request from 'request-promise-native';
 
 import { escapeRegExp } from 'lodash';
 

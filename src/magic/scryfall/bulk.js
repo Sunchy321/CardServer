@@ -6,6 +6,8 @@ import * as Reader from 'async-stream-reader';
 import { data } from '../../../config';
 import lineReader from '../../common/line-reader';
 
+import { RawCardModel } from '../db/model/raw-card';
+
 const lock = new AsyncLock();
 
 let cardProgress = { status: 'idle' };
@@ -19,6 +21,8 @@ export function cardList() {
 
 export function loadCard(file) {
     lock.acquire('card', async () => {
+        let rawCount = 0;
+
         for (let line of lineReader(data + '/magic/bulk/scryfall' + file + '.json')) {
             if (line === '[') {
                 continue;
@@ -33,7 +37,20 @@ export function loadCard(file) {
             }
 
             const json = JSON.parse(text);
+
+            const rawCard = new RawCardModel(json);
+
+            await rawCard.save();
+
+            ++rawCount;
+
+            cardProgress = {
+                status: 'save-raw',
+                count: rawCount
+            }
         }
+
+        cardProgress = { status: 'idle' };
     })
 }
 
